@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sharp Mansion — Historic Estate · Colorado Springs</title>
+
+  <meta name="description" content="Sharp Mansion is Colorado Springs' most distinguished historic estate — 14,840 square feet on Millionaire's Row, available for weddings, private events, and luxury overnight stays.">
+  <meta property="og:title" content="Sharp Mansion · 1600 N Cascade Avenue, Colorado Springs">
+  <meta property="og:description" content="An estate without equal. 112 years on Millionaire's Row.">
+  <meta property="og:image" content="">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── RESET ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── DESIGN TOKENS ──────────────────────── */
+    :root {
+      /* Palette — deep emerald + cool white. Inspired by Van Briggle tile + Italian terracotta roof */
+      --emerald:     #142818;   /* primary dark bg — deep forest green */
+      --emerald-mid: #1A3220;   /* nav, steward, cards */
+      --emerald-lt:  #213D28;   /* panel bg, ev-card bg */
+      --sage:        #2E5235;
+      --sage-lt:     #486E50;
+      --white:       #F7F8F5;   /* body bg — cool near-white with faint sage tint */
+      --white-dk:    #EEF0EB;   /* alternating section bg */
+      --white-dkr:   #E3E6DE;
+      --antique:     #B89050;   /* antique gold — distinct from Old Mill Ranch copper */
+      --antique-lt:  #CCAA72;
+      --antique-pale:#E6D5A8;
+      --text-dk:     #0F130F;   /* near-black with green undertone */
+      --text-mid:    #3A4238;   /* cool mid-tone, not warm brown */
+      --text-lt:     #6A7268;   /* cool stone-green */
+      --renjoy-red:  #F04C3B;
+
+      /* Aliases for green-dominant dark sections */
+      --onyx:        var(--emerald);
+      --onyx-mid:    var(--emerald-mid);
+      --onyx-lt:     var(--emerald-lt);
+      --forest:      var(--emerald);
+      --brass:       var(--antique);
+      --brass-lt:    var(--antique-lt);
+      --brass-pale:  var(--antique-pale);
+      --parchment:   var(--white);
+      --linen:       var(--white-dk);
+      --linen-dk:    var(--white-dkr);
+
+      --f-display: 'Playfair Display', 'Times New Roman', serif;
+      --f-body:    'EB Garamond', Georgia, serif;
+      --f-ui:      'Montserrat', system-ui, sans-serif;
+
+      --sp: clamp(5rem, 10vw, 10rem);
+      --cp: clamp(1.5rem, 5vw, 5rem);
+      --cmax: 1400px;
+    }
+
+    body {
+      font-family: var(--f-body);
+      background: var(--white);
+      color: var(--text-dk);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+
+    /* ─── SCROLL REVEAL ──────────────────────── */
+    .rv, .rv-l, .rv-r {
+      opacity: 0;
+      transition: opacity 1s cubic-bezier(.215,.61,.355,1),
+                  transform 1s cubic-bezier(.215,.61,.355,1);
+    }
+    .rv     { transform: translateY(40px); }
+    .rv-l   { transform: translateX(-40px); }
+    .rv-r   { transform: translateX(40px); }
+    .rv.on, .rv-l.on, .rv-r.on { opacity: 1; transform: none; }
+    .d1 { transition-delay: .12s; }
+    .d2 { transition-delay: .26s; }
+    .d3 { transition-delay: .42s; }
+    .d4 { transition-delay: .60s; }
+
+    /* ─── ORNAMENTAL RULE ────────────────────── */
+    .orn-rule {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 auto;
+    }
+    .orn-rule::before, .orn-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+    }
+    .orn-rule.light::before, .orn-rule.light::after { background: rgba(184,144,80,.3); }
+    .orn-rule.dark::before,  .orn-rule.dark::after  { background: rgba(220,228,215,.2); }
+    .orn-rule span {
+      font-size: .55rem;
+      letter-spacing: .3em;
+    }
+    .orn-rule.light span { color: var(--brass); }
+    .orn-rule.dark span  { color: rgba(245,239,226,.38); }
+
+    /* ─── NAV ────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem var(--cp);
+      transition: background .4s, padding .4s, border-color .4s;
+      border-bottom: 1px solid transparent;
+    }
+    #nav.sc {
+      background: rgba(20,40,24,.97);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 1.1rem var(--cp);
+      border-bottom-color: rgba(184,144,80,.18);
+    }
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-decoration: none;
+    }
+    .nav-name {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 1.1rem;
+      letter-spacing: .12em;
+      color: #fff;
+      line-height: 1;
+      text-shadow: 0 1px 10px rgba(0,0,0,.6);
+    }
+    .nav-sub {
+      font-family: var(--f-ui);
+      font-size: .52rem;
+      font-weight: 400;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      margin-top: .22rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,.6);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.8rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--f-ui);
+      font-size: .68rem;
+      font-weight: 400;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      transition: color .2s;
+      text-shadow: 0 1px 8px rgba(0,0,0,.55);
+    }
+    .nav-links a:hover { color: var(--brass-lt); }
+    .nav-cta {
+      font-family: var(--f-ui);
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--onyx);
+      background: var(--brass-lt);
+      padding: .7rem 1.7rem;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--brass); transform: translateY(-1px); }
+
+    /* ─── HERO ───────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100svh;
+      min-height: 700px;
+      overflow: hidden;
+    }
+    #hero-bg {
+      position: absolute;
+      inset: 0;
+      will-change: transform;
+    }
+    #hero-bg img {
+      width: 100%;
+      height: 116%;
+      object-fit: cover;
+      object-position: center 35%;
+      top: -8%;
+      position: absolute;
+    }
+    .hero-ov {
+      position: absolute;
+      inset: 0;
+      background:
+        /* top band — protects nav text */
+        linear-gradient(to bottom, rgba(5,6,4,.72) 0%, rgba(5,6,4,0) 22%),
+        /* bottom — darkens for hero copy */
+        linear-gradient(to top,    rgba(5,6,4,.92) 0%, rgba(5,6,4,0) 55%),
+        /* overall vignette */
+        linear-gradient(to bottom, rgba(5,6,4,.28) 0%, rgba(5,6,4,.18) 50%, rgba(5,6,4,.4) 100%);
+      z-index: 1;
+    }
+    /* grain */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+      opacity: .3;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .hero-cnt {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      padding: 0 var(--cp) clamp(3.5rem,7vw,6rem);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: calc(var(--cmax) + 2 * var(--cp));
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--f-ui);
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--brass-lt);
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      animation: hfade 1s .3s ease forwards;
+      text-shadow: 0 1px 14px rgba(0,0,0,.75);
+    }
+    .hero-h1 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(4.5rem, 12vw, 11rem);
+      line-height: .9;
+      color: #fff;
+      letter-spacing: -.02em;
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      animation: hfade 1.2s .5s ease forwards;
+      text-shadow: 0 2px 24px rgba(0,0,0,.5);
+    }
+    .hero-h1 em {
+      display: block;
+      font-style: italic;
+      color: rgba(255,255,255,.82);
+      font-weight: 400;
+    }
+    .hero-rule {
+      width: 56px;
+      height: 1px;
+      background: var(--brass);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: hfade .9s .8s ease forwards;
+    }
+    .hero-tagline {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1rem, 2.2vw, 1.45rem);
+      color: rgba(255,255,255,.72);
+      line-height: 1.5;
+      max-width: 560px;
+      opacity: 0;
+      animation: hfade 1s 1s ease forwards;
+      text-shadow: 0 1px 12px rgba(0,0,0,.65);
+    }
+    .hero-scroll {
+      position: absolute;
+      right: var(--cp);
+      bottom: clamp(3rem,6vw,5rem);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .65rem;
+      opacity: 0;
+      animation: hfade .8s 1.8s ease forwards;
+    }
+    .hero-scroll span {
+      font-family: var(--f-ui);
+      font-size: .55rem;
+      font-weight: 500;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+      writing-mode: vertical-rl;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 52px;
+      background: linear-gradient(to bottom, rgba(181,144,74,.7), transparent);
+      animation: pulse-ln 2.8s 2.2s infinite;
+    }
+    @keyframes hfade { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+    @keyframes pulse-ln { 0%,100%{opacity:.8} 50%{opacity:.2} }
+
+    /* ─── MARQUEE ────────────────────────────── */
+    #marquee {
+      background: var(--forest);
+      overflow: hidden;
+      padding: 1.1rem 0;
+      border-top: 1px solid rgba(181,144,74,.18);
+      border-bottom: 1px solid rgba(181,144,74,.18);
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: scroll-x 28s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .mi {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+      padding: 0 2.2rem;
+      white-space: nowrap;
+    }
+    .mi-txt {
+      font-family: var(--f-ui);
+      font-size: .62rem;
+      font-weight: 500;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: rgba(245,239,226,.65);
+    }
+    .mi-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--brass);
+      flex-shrink: 0;
+    }
+    @keyframes scroll-x { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+    /* ─── INTRO ──────────────────────────────── */
+    #intro {
+      background: var(--parchment);
+      padding: var(--sp) var(--cp);
+    }
+    .intro-inner {
+      max-width: var(--cmax);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(4rem, 8vw, 10rem);
+      align-items: center;
+    }
+    .intro-photo {
+      position: relative;
+      overflow: hidden;
+    }
+    .intro-photo img {
+      width: 100%;
+      height: clamp(420px, 55vw, 700px);
+      object-fit: cover;
+      display: block;
+    }
+    .intro-badge {
+      position: absolute;
+      bottom: 2rem;
+      right: -1.5rem;
+      background: var(--forest);
+      padding: 1.8rem 2rem;
+      border: 1px solid rgba(181,144,74,.22);
+    }
+    .intro-badge-num {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 3rem;
+      color: var(--brass-lt);
+      line-height: 1;
+      display: block;
+    }
+    .intro-badge-lbl {
+      font-family: var(--f-ui);
+      font-size: .58rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: rgba(245,239,226,.52);
+      display: block;
+      margin-top: .3rem;
+    }
+    .intro-text {}
+    .intro-kicker {
+      font-family: var(--f-ui);
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 1.6rem;
+      display: block;
+    }
+    .intro-h2 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      line-height: 1.06;
+      color: var(--text-dk);
+      letter-spacing: -.015em;
+      margin-bottom: 2rem;
+    }
+    .intro-h2 em { font-style: italic; color: var(--sage); }
+    .intro-p {
+      font-family: var(--f-body);
+      font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+      line-height: 1.82;
+      color: var(--text-mid);
+      margin-bottom: 1.4rem;
+    }
+    .intro-orn { max-width: 280px; margin: 2rem 0; }
+
+    /* ─── SPACES ─────────────────────────────── */
+    #spaces {
+      background: var(--onyx);
+      padding: var(--sp) 0;
+    }
+    .sec-hdr {
+      text-align: center;
+      padding: 0 var(--cp);
+      margin-bottom: clamp(4rem, 8vw, 7rem);
+    }
+    .sec-kicker {
+      font-family: var(--f-ui);
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      color: var(--brass);
+      display: block;
+      margin-bottom: 1.4rem;
+    }
+    .sec-h2 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 6vw, 5.5rem);
+      line-height: 1.04;
+      color: var(--parchment);
+      letter-spacing: -.015em;
+    }
+    .sec-h2 em { font-style: italic; color: var(--brass-lt); }
+    .sec-sub {
+      font-family: var(--f-body);
+      font-style: italic;
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.7;
+      color: rgba(245,239,226,.5);
+      max-width: 580px;
+      margin: 1.6rem auto 0;
+    }
+
+    .spaces-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sp-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: clamp(420px, 56vw, 680px);
+    }
+    .sp-row.flip .sp-img { order: 2; }
+    .sp-row.flip .sp-body { order: 1; }
+
+    .sp-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .sp-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .8s cubic-bezier(.215,.61,.355,1);
+    }
+    .sp-row:hover .sp-img img { transform: scale(1.03); }
+    .sp-img-cap {
+      position: absolute;
+      bottom: 1.4rem;
+      left: 1.4rem;
+      font-family: var(--f-ui);
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(6px);
+      padding: .35rem .7rem;
+    }
+
+    .sp-body {
+      padding: clamp(3rem, 6vw, 6rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--emerald-lt);
+      border: 1px solid rgba(184,144,80,.08);
+    }
+    .sp-num {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: .88rem;
+      letter-spacing: .18em;
+      color: rgba(181,144,74,.55);
+      margin-bottom: 1rem;
+    }
+    .sp-h3 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(1.8rem, 3.8vw, 3rem);
+      line-height: 1.08;
+      color: var(--parchment);
+      letter-spacing: -.01em;
+      margin-bottom: .5rem;
+    }
+    .sp-sub {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: clamp(.95rem, 1.8vw, 1.2rem);
+      color: var(--brass-lt);
+      margin-bottom: 2rem;
+    }
+    .sp-rule { width: 36px; height: 1px; background: var(--brass); margin-bottom: 2rem; }
+    .sp-p {
+      font-family: var(--f-body);
+      font-size: 1.06rem;
+      line-height: 1.9;
+      color: rgba(245,239,226,.55);
+      margin-bottom: 1.2rem;
+    }
+    .sp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .8rem;
+    }
+    .sp-tag {
+      font-family: var(--f-ui);
+      font-size: .6rem;
+      font-weight: 400;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(245,239,226,.45);
+      border: 1px solid rgba(245,239,226,.14);
+      padding: .38rem .85rem;
+      transition: all .2s;
+      cursor: default;
+    }
+    .sp-tag:hover {
+      border-color: rgba(181,144,74,.45);
+      color: var(--brass-lt);
+    }
+
+    /* ─── GALLERY FEATURE ────────────────────── */
+    #gallery-feature {
+      background: var(--linen);
+      padding: var(--sp) var(--cp);
+    }
+    .gf-inner {
+      max-width: var(--cmax);
+      margin: 0 auto;
+    }
+    .gf-hdr {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+      gap: 2rem;
+    }
+    .gf-h2 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+      color: var(--text-dk);
+      letter-spacing: -.015em;
+    }
+    .gf-h2 em { font-style: italic; color: var(--sage); }
+    .gf-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: .45rem;
+    }
+    .gi {
+      overflow: hidden;
+      cursor: zoom-in;
+      position: relative;
+    }
+    .gi img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s cubic-bezier(.215,.61,.355,1);
+    }
+    .gi:hover img { transform: scale(1.04); }
+    .gi-1 { grid-row: 1 / 3; height: clamp(440px, 58vw, 760px); }
+    .gi-2, .gi-3 { height: clamp(200px, 26vw, 360px); }
+    .gi-4, .gi-5 { height: clamp(200px, 26vw, 360px); }
+    .gf-more {
+      display: flex;
+      gap: .45rem;
+      margin-top: .45rem;
+    }
+    .gf-more .gi { flex: 1; height: clamp(140px, 18vw, 240px); }
+
+    /* ─── EVENTS ─────────────────────────────── */
+    #events {
+      background: var(--forest);
+      padding: var(--sp) var(--cp);
+      position: relative;
+    }
+    #events::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(181,144,74,.35), transparent);
+    }
+    #events::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(181,144,74,.35), transparent);
+    }
+    .ev-inner {
+      max-width: var(--cmax);
+      margin: 0 auto;
+    }
+    .ev-hdr {
+      text-align: center;
+      margin-bottom: clamp(3.5rem, 7vw, 6rem);
+    }
+    .ev-h2 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+      line-height: 1.06;
+      color: var(--parchment);
+      letter-spacing: -.015em;
+    }
+    .ev-h2 em { font-style: italic; color: var(--brass-lt); }
+    .ev-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      border: 1px solid rgba(181,144,74,.14);
+      background: rgba(181,144,74,.14);
+    }
+    .ev-card {
+      background: var(--forest);
+      padding: clamp(2.2rem, 4vw, 3.5rem);
+      transition: background .3s;
+      position: relative;
+    }
+    .ev-card:hover { background: rgba(255,255,255,.04); }
+    .ev-n {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 5rem;
+      font-weight: 400;
+      color: rgba(181,144,74,.08);
+      line-height: 1;
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+    }
+    .ev-icon { width: 38px; height: 38px; color: var(--brass); margin-bottom: 1.6rem; }
+    .ev-h3 {
+      font-family: var(--f-display);
+      font-weight: 500;
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      color: var(--parchment);
+      margin-bottom: .4rem;
+    }
+    .ev-cat {
+      font-family: var(--f-ui);
+      font-size: .58rem;
+      font-weight: 500;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .ev-p {
+      font-family: var(--f-body);
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(245,239,226,.5);
+    }
+
+    /* ─── STATS ──────────────────────────────── */
+    #stats {
+      background: var(--onyx);
+      padding: clamp(3.5rem, 7vw, 6rem) var(--cp);
+    }
+    .stats-inner {
+      max-width: var(--cmax);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat {
+      text-align: center;
+      padding: clamp(2rem, 4vw, 3rem) 1rem;
+      border-right: 1px solid rgba(181,144,74,.1);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(3rem, 5.5vw, 5.2rem);
+      color: var(--brass-lt);
+      line-height: 1;
+      margin-bottom: .6rem;
+    }
+    .stat-l {
+      font-family: var(--f-ui);
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(245,239,226,.35);
+    }
+
+    /* ─── HISTORY ────────────────────────────── */
+    #history {
+      background: var(--parchment);
+      padding: var(--sp) 0;
+    }
+    .hist-hdr {
+      text-align: center;
+      padding: 0 var(--cp);
+      margin-bottom: clamp(4rem, 8vw, 7rem);
+    }
+    .hist-h2 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 6vw, 5.5rem);
+      line-height: 1.04;
+      color: var(--text-dk);
+      letter-spacing: -.015em;
+    }
+    .hist-h2 em { font-style: italic; color: var(--sage); }
+
+    .timeline {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 var(--cp);
+      position: relative;
+    }
+    .tl-spine {
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(45,74,50,.25) 8%, rgba(45,74,50,.25) 92%, transparent);
+      transform: translateX(-50%);
+    }
+    .tl-beat {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+      margin-bottom: clamp(5rem, 10vw, 9rem);
+      position: relative;
+    }
+    .tl-beat:last-child { margin-bottom: 0; }
+    .tl-beat.flip .tl-copy { order: 2; }
+    .tl-beat.flip .tl-photo { order: 1; }
+    .tl-node {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--sage);
+      border: 2px solid var(--parchment);
+      box-shadow: 0 0 0 5px rgba(45,74,50,.2);
+      z-index: 2;
+    }
+    .tl-year {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      color: rgba(45,74,50,.08);
+      line-height: 1;
+      margin-bottom: -.5rem;
+      letter-spacing: -.02em;
+    }
+    .tl-h3 {
+      font-family: var(--f-display);
+      font-weight: 500;
+      font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+      color: var(--text-dk);
+      line-height: 1.22;
+      margin-bottom: 1.2rem;
+    }
+    .tl-p {
+      font-family: var(--f-body);
+      font-size: 1.04rem;
+      line-height: 1.88;
+      color: var(--text-mid);
+    }
+    .tl-p + .tl-p { margin-top: 1rem; }
+    .tl-photo {
+      overflow: hidden;
+    }
+    .tl-photo img {
+      width: 100%;
+      height: clamp(280px, 38vw, 440px);
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ─── DETAILS ────────────────────────────── */
+    #details {
+      background: var(--linen);
+      padding: var(--sp) var(--cp);
+    }
+    .det-inner {
+      max-width: var(--cmax);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.55fr;
+      gap: clamp(4rem, 8vw, 10rem);
+      align-items: start;
+    }
+    .det-sticky {
+      position: sticky;
+      top: 7rem;
+    }
+    .det-h2 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      color: var(--text-dk);
+      letter-spacing: -.015em;
+      margin-bottom: 1.5rem;
+    }
+    .det-h2 em { display: block; font-style: italic; color: var(--sage); }
+    .det-sub {
+      font-family: var(--f-body);
+      font-style: italic;
+      font-size: 1.06rem;
+      line-height: 1.75;
+      color: var(--text-lt);
+      margin-bottom: 2.5rem;
+    }
+    .avail-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      border: 1px solid rgba(46,82,53,.35);
+      background: rgba(46,82,53,.1);
+      padding: .65rem 1.4rem;
+    }
+    .avail-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #5A9A6A;
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { box-shadow:0 0 0 0 rgba(90,154,106,.4); }
+      50%      { box-shadow:0 0 0 6px rgba(90,154,106,0); }
+    }
+    .avail-txt {
+      font-family: var(--f-ui);
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--sage-lt);
+    }
+    .det-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .di {
+      padding: 1.7rem 0;
+      border-bottom: 1px solid rgba(58,66,56,.14);
+    }
+    .di:nth-last-child(-n+2) { border-bottom: none; }
+    .di:nth-child(odd) { padding-right: 2rem; border-right: 1px solid rgba(58,66,56,.14); }
+    .di:nth-child(even) { padding-left: 2rem; }
+    .di-l {
+      font-family: var(--f-ui);
+      font-size: .58rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: .5rem;
+    }
+    .di-v {
+      font-family: var(--f-display);
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: var(--text-dk);
+      line-height: 1.3;
+    }
+    .di-n {
+      font-family: var(--f-body);
+      font-style: italic;
+      font-size: .88rem;
+      color: var(--text-lt);
+      margin-top: .25rem;
+    }
+
+    /* ─── INQUIRY ────────────────────────────── */
+    #inquiry {
+      background: var(--onyx);
+      padding: var(--sp) var(--cp);
+      position: relative;
+    }
+    #inquiry::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(181,144,74,.25), transparent);
+    }
+    .inq-inner {
+      max-width: var(--cmax);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(4rem, 8vw, 10rem);
+      align-items: start;
+    }
+    .inq-sticky { position: sticky; top: 7rem; }
+    .inq-h2 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      color: var(--parchment);
+      letter-spacing: -.015em;
+      margin-bottom: 1.4rem;
+    }
+    .inq-h2 em { display: block; font-style: italic; color: var(--brass-lt); }
+    .inq-p {
+      font-family: var(--f-body);
+      font-size: 1.06rem;
+      line-height: 1.88;
+      color: rgba(245,239,226,.5);
+      margin-bottom: 3rem;
+    }
+    .inq-contact-hdr {
+      font-family: var(--f-ui);
+      font-size: .58rem;
+      font-weight: 600;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: .8rem;
+      border-top: 1px solid rgba(181,144,74,.2);
+      padding-top: 2rem;
+    }
+    .inq-contact-val {
+      font-family: var(--f-display);
+      font-size: 1.1rem;
+      color: var(--parchment);
+      margin-bottom: .35rem;
+    }
+    .inq-contact-val a { text-decoration: none; transition: color .2s; }
+    .inq-contact-val a:hover { color: var(--brass-lt); }
+
+    /* form */
+    .iform { display: flex; flex-direction: column; gap: 1.2rem; }
+    .if-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .if-grp { display: flex; flex-direction: column; gap: .5rem; }
+    .if-grp label {
+      font-family: var(--f-ui);
+      font-size: .58rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(181,144,74,.6);
+    }
+    .if-grp input,
+    .if-grp select,
+    .if-grp textarea {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.09);
+      color: var(--parchment);
+      font-family: var(--f-body);
+      font-size: 1.02rem;
+      padding: .9rem 1.1rem;
+      outline: none;
+      transition: border-color .25s, background .25s;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+    }
+    .if-grp select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B5904A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.1rem center;
+      background-color: rgba(255,255,255,.04);
+      padding-right: 2.8rem;
+      cursor: pointer;
+    }
+    .if-grp select option { background: var(--onyx-mid); color: var(--parchment); }
+    .if-grp input:focus,
+    .if-grp select:focus,
+    .if-grp textarea:focus {
+      border-color: rgba(181,144,74,.48);
+      background: rgba(255,255,255,.07);
+    }
+    .if-grp input::placeholder,
+    .if-grp textarea::placeholder { color: rgba(245,239,226,.2); }
+    .if-grp textarea { resize: vertical; min-height: 140px; }
+    .iform-submit {
+      font-family: var(--f-ui);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--onyx);
+      background: var(--brass-lt);
+      border: none;
+      padding: 1.1rem 2.8rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background .2s, transform .15s;
+    }
+    .iform-submit:hover { background: var(--brass); transform: translateY(-2px); }
+    .iform-note {
+      font-family: var(--f-body);
+      font-style: italic;
+      font-size: .85rem;
+      color: rgba(245,239,226,.26);
+    }
+
+    /* ─── STEWARD ────────────────────────────── */
+    #steward {
+      background: var(--onyx-mid);
+      border-top: 1px solid rgba(181,144,74,.1);
+      padding: clamp(2.5rem,5vw,4.5rem) var(--cp);
+    }
+    .stw-inner {
+      max-width: var(--cmax);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stw-p {
+      font-family: var(--f-body);
+      font-style: italic;
+      font-size: clamp(.95rem,1.6vw,1.1rem);
+      color: rgba(245,239,226,.38);
+      max-width: 640px;
+      line-height: 1.75;
+    }
+    .stw-p strong { color: rgba(245,239,226,.65); font-style: normal; }
+    .rnjy {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    .rnjy-mark {
+      width: 36px; height: 36px;
+      background: var(--renjoy-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--f-ui);
+      font-weight: 700;
+      font-size: .82rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .rnjy-name {
+      font-family: var(--f-ui);
+      font-weight: 600;
+      font-size: .88rem;
+      color: rgba(245,239,226,.58);
+      letter-spacing: .06em;
+      display: block;
+    }
+    .rnjy-tag {
+      font-family: var(--f-ui);
+      font-size: .58rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(245,239,226,.28);
+      display: block;
+      margin-top: .2rem;
+    }
+
+    /* ─── FOOTER ─────────────────────────────── */
+    footer {
+      background: var(--onyx);
+      border-top: 1px solid rgba(255,255,255,.04);
+      padding: clamp(2.5rem,5vw,4rem) var(--cp);
+    }
+    .ft-inner {
+      max-width: var(--cmax);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .ft-brand {}
+    .ft-name {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--parchment);
+      letter-spacing: .06em;
+    }
+    .ft-addr {
+      font-family: var(--f-ui);
+      font-size: .58rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(245,239,226,.28);
+      margin-top: .4rem;
+    }
+    .ft-links {
+      display: flex;
+      gap: 1.8rem;
+    }
+    .ft-links a {
+      font-family: var(--f-ui);
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(245,239,226,.3);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .ft-links a:hover { color: var(--brass-lt); }
+    .ft-copy {
+      font-family: var(--f-ui);
+      font-size: .58rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(245,239,226,.2);
+      text-align: right;
+      line-height: 1.8;
+    }
+    .ft-copy a { color: rgba(240,76,59,.4); text-decoration: none; transition: color .2s; }
+    .ft-copy a:hover { color: var(--renjoy-red); }
+
+    /* ─── LIGHTBOX ───────────────────────────── */
+    #lb {
+      position: fixed; inset: 0;
+      background: rgba(5,5,4,.97);
+      z-index: 600;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    #lb.open { display: flex; }
+    #lb-img { max-width: 92vw; max-height: 88vh; object-fit: contain; }
+    #lb-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none;
+      color: rgba(255,255,255,.45);
+      font-size: 2.2rem; line-height: 1;
+      cursor: pointer; transition: color .2s;
+      font-family: var(--f-ui);
+    }
+    #lb-close:hover { color: var(--brass-lt); }
+    #lb-prev, #lb-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.6);
+      font-size: 1.5rem;
+      padding: .8rem 1.15rem;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    #lb-prev { left: 1.5rem; } #lb-next { right: 1.5rem; }
+    #lb-prev:hover, #lb-next:hover { background: rgba(255,255,255,.12); color: #fff; }
+
+    /* ─── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 1024px) {
+      .sp-row { grid-template-columns: 1fr; min-height: auto; }
+      .sp-row.flip .sp-img, .sp-row.flip .sp-body { order: unset; }
+      .sp-img img { height: clamp(300px, 52vw, 480px); }
+      .gf-grid { grid-template-columns: 1fr 1fr; }
+      .gi-1 { grid-column: 1 / 3; grid-row: auto; height: clamp(300px, 45vw, 480px); }
+      .gi-2, .gi-3, .gi-4, .gi-5 { height: clamp(180px, 30vw, 280px); }
+    }
+    @media (max-width: 900px) {
+      .intro-inner { grid-template-columns: 1fr; }
+      .intro-badge { right: 1rem; }
+      .ev-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-right: none; border-bottom: 1px solid rgba(181,144,74,.1); }
+      .stat:nth-child(2n) { border-right: none; }
+      .stat:last-child, .stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+      .det-inner { grid-template-columns: 1fr; }
+      .det-sticky { position: static; }
+      .inq-inner { grid-template-columns: 1fr; }
+      .inq-sticky { position: static; }
+      .if-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .tl-spine, .tl-node { display: none; }
+      .tl-beat { grid-template-columns: 1fr; }
+      .tl-beat.flip .tl-copy, .tl-beat.flip .tl-photo { order: unset; }
+    }
+    @media (max-width: 640px) {
+      .ft-inner, .stw-inner { flex-direction: column; text-align: center; }
+      .ft-copy { text-align: center; }
+      .det-grid { grid-template-columns: 1fr; }
+      .di:nth-child(odd) { padding-right: 0; border-right: none; }
+      .di:nth-child(even) { padding-left: 0; }
+      .di:last-child { border-bottom: none; }
+      .gf-more { flex-wrap: wrap; }
+      .gf-hdr { flex-direction: column; align-items: flex-start; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .hero-tagline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LIGHTBOX ── -->
+<div id="lb" role="dialog" aria-modal="true">
+  <button id="lb-close" aria-label="Close">&#215;</button>
+  <button id="lb-prev" aria-label="Previous">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next" aria-label="Next">&#8250;</button>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#" class="nav-brand">
+    <span class="nav-name">Sharp Mansion</span>
+    <span class="nav-sub">Est. 1912 · Colorado Springs</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#spaces">The Estate</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#history">History</a></li>
+    <li><a href="#details">Details</a></li>
+    <li><a href="#gallery-feature">Gallery</a></li>
+  </ul>
+  <a href="#inquiry" class="nav-cta">Request a Tour</a>
+</nav>
+
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section id="hero">
+  <div id="hero-bg">
+    <img src="mansion6.webp" alt="Sharp Mansion aerial view — Colorado Springs, Colorado" loading="eager" fetchpriority="high">
+  </div>
+  <div class="hero-ov"></div>
+  <div class="hero-cnt">
+    <p class="hero-eyebrow">Millionaire's Row · 1600 N Cascade Avenue · Colorado Springs</p>
+    <h1 class="hero-h1">Sharp<br><em>Mansion</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-tagline">An estate without equal.<br>112 years on Colorado's most celebrated address.</p>
+  </div>
+  <div class="hero-scroll">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     MARQUEE
+══════════════════════════════════════════ -->
+<div id="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="mi"><span class="mi-txt">Est. 1912</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">14,840 Square Feet</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Seven Van Briggle Fireplaces</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Millionaire's Row</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Architect Nicholas van den Arend</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Four Owners in 112 Years</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Italian Terracotta Roof</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Private Event Venue</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Luxury Overnight Stays</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Old North End Historic District</span><span class="mi-dot"></span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="mi"><span class="mi-txt">Est. 1912</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">14,840 Square Feet</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Seven Van Briggle Fireplaces</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Millionaire's Row</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Architect Nicholas van den Arend</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Four Owners in 112 Years</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Italian Terracotta Roof</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Private Event Venue</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Luxury Overnight Stays</span><span class="mi-dot"></span></div>
+    <div class="mi"><span class="mi-txt">Old North End Historic District</span><span class="mi-dot"></span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     INTRO
+══════════════════════════════════════════ -->
+<section id="intro">
+  <div class="intro-inner">
+    <div class="intro-photo rv-l">
+      <img src="mansion7.webp" alt="Sharp Mansion front arcade at twilight" loading="lazy">
+      <div class="intro-badge">
+        <span class="intro-badge-num">1912</span>
+        <span class="intro-badge-lbl">Year Built</span>
+      </div>
+    </div>
+    <div class="intro-text">
+      <span class="intro-kicker rv">The Estate</span>
+      <h2 class="intro-h2 rv d1">Colorado's Most<br><em>Distinguished</em><br>Private Residence</h2>
+      <div class="orn-rule light intro-orn rv d2"><span>◆</span></div>
+      <p class="intro-p rv d2">On North Cascade Avenue — once home to fifty of Colorado's wealthiest families — the Sharp Mansion stands as the grandest survivor of an era that shaped a state. Designed in 1912 by master architect Nicholas van den Arend, its 14,840 square feet of Italian terracotta, gray brick, and African mahogany have witnessed more than a century of Colorado history.</p>
+      <p class="intro-p rv d3">Only four families have ever held the keys. Today, the Sharp Mansion opens its doors for private events, weddings, corporate gatherings, and luxury overnight stays — with every original detail intact, and every room ready to receive.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     THE SPACES
+══════════════════════════════════════════ -->
+<section id="spaces">
+  <div class="sec-hdr">
+    <span class="sec-kicker rv">The Spaces</span>
+    <h2 class="sec-h2 rv d1">Three Spaces.<br><em>One Address.</em></h2>
+    <p class="sec-sub rv d2">Each space carries its own character, its own history. Together, they compose an estate that has no equal in Colorado Springs.</p>
+  </div>
+
+  <div class="spaces-list">
+
+    <!-- 01 The Grand Mansion -->
+    <div class="sp-row">
+      <div class="sp-img">
+        <img src="mansion10.webp" alt="Sharp Mansion grand foyer — mahogany arched doors and tapestry walls" loading="lazy">
+        <span class="sp-img-cap">The Grand Mansion · Main Foyer</span>
+      </div>
+      <div class="sp-body">
+        <div class="sp-num rv">I.</div>
+        <h3 class="sp-h3 rv d1">The Grand Mansion</h3>
+        <p class="sp-sub rv d2">Nine bedrooms. Seven fireplaces. A century of flawless preservation.</p>
+        <div class="sp-rule rv d2"></div>
+        <p class="sp-p rv d2">Designed by Dutch-born architect Nicholas van den Arend — creator of the landmark Van Briggle Memorial Pottery — the mansion is a masterwork of Mediterranean arcades, Craftsman-beamed ceilings, and Jacobean ornament. At 14,840 square feet, it is among the largest and finest historic residences in the American West.</p>
+        <p class="sp-p rv d3">Every original Van Briggle ceramic tile fireplace remains intact across seven rooms. Original African Mahogany doors, preserved tapestry wallpaper in the dining room, and a working greenhouse off the main hall complete the picture. Nothing has been compromised. Nothing has been lost.</p>
+        <div class="sp-tags rv d3">
+          <span class="sp-tag">Estate Weddings</span>
+          <span class="sp-tag">Private Galas</span>
+          <span class="sp-tag">Corporate Summits</span>
+          <span class="sp-tag">Film Production</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 The Conservatory -->
+    <div class="sp-row flip">
+      <div class="sp-img">
+        <img src="mansion13.webp" alt="Sharp Mansion glass conservatory with original tile floor" loading="lazy">
+        <span class="sp-img-cap">The Conservatory · Original 1912 Greenhouse</span>
+      </div>
+      <div class="sp-body">
+        <div class="sp-num rv">II.</div>
+        <h3 class="sp-h3 rv d1">The Conservatory</h3>
+        <p class="sp-sub rv d2">Glass, iron, and original tile — preserved exactly as built.</p>
+        <div class="sp-rule rv d2"></div>
+        <p class="sp-p rv d2">Accessible directly off the dining room, the conservatory is one of the most rare surviving features of any residential estate in Colorado. Its original tile floor, iron-framed glass ceiling, and Victorian proportions create a setting unlike anything that can be recreated or fabricated.</p>
+        <p class="sp-p rv d3">As a cocktail hour space, an intimate dinner setting, a ceremony backdrop, or a morning gathering for overnight guests — the conservatory transforms every occasion into something genuinely extraordinary.</p>
+        <div class="sp-tags rv d3">
+          <span class="sp-tag">Cocktail Hours</span>
+          <span class="sp-tag">Intimate Dinners</span>
+          <span class="sp-tag">Ceremony Setting</span>
+          <span class="sp-tag">Morning Gatherings</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 The Grounds -->
+    <div class="sp-row">
+      <div class="sp-img">
+        <img src="mansion5.webp" alt="Sharp Mansion illuminated pergola at dusk with fountain and estate" loading="lazy">
+        <span class="sp-img-cap">The Grounds · Pergola at Dusk</span>
+      </div>
+      <div class="sp-body">
+        <div class="sp-num rv">III.</div>
+        <h3 class="sp-h3 rv d1">The Grounds</h3>
+        <p class="sp-sub rv d2">0.87 acres. A fountain. Vined pergola. The estate at night.</p>
+        <div class="sp-rule rv d2"></div>
+        <p class="sp-p rv d2">Enclosed by the original stone-and-iron perimeter fence, the grounds of Sharp Mansion are a destination in themselves. A columned pergola draped in climbing vines and strung with lights frames the central lawn. A sculptural fountain anchors the garden. A lighted pickleball court and putting green complete the picture.</p>
+        <p class="sp-p rv d3">At dusk, when the mansion's arched arcade glows amber and the pergola lights reflect in the fountain — there is no venue in Colorado Springs that compares. This is the setting that photographs themselves cannot fully prepare guests for.</p>
+        <div class="sp-tags rv d3">
+          <span class="sp-tag">Garden Ceremonies</span>
+          <span class="sp-tag">Open-Air Receptions</span>
+          <span class="sp-tag">Evening Entertaining</span>
+          <span class="sp-tag">Team Activities</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 The Carriage House -->
+    <div class="sp-row flip">
+      <div class="sp-img">
+        <img src="mansion9.webp" alt="Sharp Mansion sunroom with arched windows overlooking the estate grounds" loading="lazy">
+        <span class="sp-img-cap">The Carriage House · Private Guest Suite</span>
+      </div>
+      <div class="sp-body">
+        <div class="sp-num rv">IV.</div>
+        <h3 class="sp-h3 rv d1">The Carriage House</h3>
+        <p class="sp-sub rv d2">The original manservant's quarters — reimagined for the modern guest.</p>
+        <div class="sp-rule rv d2"></div>
+        <p class="sp-p rv d2">When Arthur Sharp built his estate in 1912, he built for a full household. The two-story carriage house — with its historic manservant's quarters — has been thoughtfully converted into a private luxury suite that sleeps up to eleven, while preserving the character and architectural detail of the original structure.</p>
+        <p class="sp-p rv d3">Three bedrooms including a king suite, a full kitchen, private entrance, hot tub access, and fast Wi-Fi. Available for overnight stays, as bridal party quarters, or as VIP guest accommodation for events held on the full estate.</p>
+        <div class="sp-tags rv d3">
+          <span class="sp-tag">Overnight Stays</span>
+          <span class="sp-tag">Bridal Suites</span>
+          <span class="sp-tag">VIP Quarters</span>
+          <span class="sp-tag">Extended Stays</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     GALLERY
+══════════════════════════════════════════ -->
+<section id="gallery-feature">
+  <div class="gf-inner">
+    <div class="gf-hdr">
+      <div>
+        <span class="sec-kicker rv" style="text-align:left;">Inside the Estate</span>
+        <h2 class="gf-h2 rv d1">An Estate<br><em>Room by Room</em></h2>
+      </div>
+    </div>
+
+    <div class="gf-grid">
+      <div class="gi gi-1 rv">
+        <img src="mansion3.jpg" alt="Sharp Mansion pickleball court and fountain at night, estate illuminated" loading="lazy">
+      </div>
+      <div class="gi gi-2 rv d1">
+        <img src="mansion2.avif" alt="Sharp Mansion library with Van Briggle fireplace and coffered ceiling" loading="lazy">
+      </div>
+      <div class="gi gi-3 rv d2">
+        <img src="mansion4.avif" alt="Sharp Mansion living room with bay windows and library ladder" loading="lazy">
+      </div>
+      <div class="gi gi-4 rv d1">
+        <img src="mansion12.webp" alt="Sharp Mansion kitchen with green marble island and cherry cabinetry" loading="lazy">
+      </div>
+      <div class="gi gi-5 rv d2">
+        <img src="mansion8.webp" alt="Sharp Mansion living room with green Van Briggle fireplace" loading="lazy">
+      </div>
+    </div>
+
+    <div class="gf-more">
+      <div class="gi rv">
+        <img src="mansion11.webp" alt="Sharp Mansion coffered ceiling living room with bay windows" loading="lazy">
+      </div>
+      <div class="gi rv d1">
+        <img src="mansion15.webp" alt="Sharp Mansion master bath with freestanding tub and chandelier" loading="lazy">
+      </div>
+      <div class="gi rv d2">
+        <img src="mansion14.webp" alt="Sharp Mansion kitchen dining area" loading="lazy">
+      </div>
+      <div class="gi rv d3">
+        <img src="sharp-m.webp" alt="Sharp Mansion exterior aerial view with Pikes Peak" loading="lazy">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     EVENTS
+══════════════════════════════════════════ -->
+<section id="events">
+  <div class="ev-inner">
+    <div class="ev-hdr">
+      <span class="sec-kicker rv" style="color:rgba(202,168,106,.8)">What We Host</span>
+      <h2 class="ev-h2 rv d1">Every Occasion<br><em>Deserves a Mansion</em></h2>
+    </div>
+
+    <div class="ev-grid">
+
+      <div class="ev-card rv">
+        <span class="ev-n">I</span>
+        <svg class="ev-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 8c-2 4-7 6-7 11a7 7 0 0014 0c0-5-5-7-7-11z"/>
+          <path d="M15 30c-3 1.5-5 4-5 7h24c0-3-2-5.5-5-7"/>
+          <path d="M22 30v7"/>
+        </svg>
+        <h3 class="ev-h3">Estate Weddings &amp; Galas</h3>
+        <span class="ev-cat">The Mansion · The Conservatory · The Grounds</span>
+        <p class="ev-p">The Sharp Mansion is not a converted barn or a modern rental facility — it is a true estate, and it shows. Exchange your vows beneath the arched arcade. Celebrate in rooms that have hosted Colorado's most distinguished families for over a century. The carriage house becomes your bridal suite. The garden fountain becomes your cocktail hour backdrop. There is nothing like it in Colorado.</p>
+      </div>
+
+      <div class="ev-card rv d1">
+        <span class="ev-n">II</span>
+        <svg class="ev-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="14" width="32" height="22" rx="1"/>
+          <path d="M14 14v-3a8 8 0 0116 0v3"/>
+          <circle cx="22" cy="25" r="4"/>
+          <path d="M22 29v4"/>
+        </svg>
+        <h3 class="ev-h3">Corporate Retreats &amp; Leadership Summits</h3>
+        <span class="ev-cat">The Library · The Grounds · Overnight Stays</span>
+        <p class="ev-p">A.G. Sharp ran his bank and this city's entire streetcar system from this address. Some rooms carry that kind of gravity. When you convene your leadership team in a space with 112 years of Colorado history, something shifts. Strategy sessions in the mahogany library. Dinner by seven fireplaces. The carriage house for overnight stays. The pickleball court for what comes after.</p>
+      </div>
+
+      <div class="ev-card rv d2">
+        <span class="ev-n">III</span>
+        <svg class="ev-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 36V16l14-8 14 8v20"/>
+          <path d="M16 36v-9h12v9"/>
+          <path d="M22 8v5"/>
+        </svg>
+        <h3 class="ev-h3">Luxury Overnight Stays</h3>
+        <span class="ev-cat">The Carriage House · Up to 11 Guests</span>
+        <p class="ev-p">Book the historic carriage house — now a three-bedroom luxury suite — and sleep inside Colorado's most distinguished residential address. Original 1912 architectural detail surrounds you. A hot tub, full kitchen, and private check-in give you everything a world-class hotel cannot: genuine history, authentic character, and the quiet of an estate that has sheltered Colorado's finest for over a century.</p>
+      </div>
+
+      <div class="ev-card rv d3">
+        <span class="ev-n">IV</span>
+        <svg class="ev-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 6l4 9 10 1.5-7 6.5 1.5 9.5L22 28l-8.5 4.5 1.5-9.5-7-6.5 10-1.5z"/>
+        </svg>
+        <h3 class="ev-h3">Private Dinners &amp; Milestone Celebrations</h3>
+        <span class="ev-cat">The Dining Room · The Conservatory · The Pergola</span>
+        <p class="ev-p">A birthday that deserves a room commensurate with the occasion. A rehearsal dinner in the tapestry-hung dining room. An anniversary evening in the conservatory. A private dinner in the pergola garden as the sun drops behind Pikes Peak. The Sharp Mansion transforms milestone moments into memories that no hotel ballroom — at any price — can replicate.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     STATS
+══════════════════════════════════════════ -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stat rv">
+      <div class="stat-n">112</div>
+      <div class="stat-l">Years of History</div>
+    </div>
+    <div class="stat rv d1">
+      <div class="stat-n">14,840</div>
+      <div class="stat-l">Square Feet</div>
+    </div>
+    <div class="stat rv d2">
+      <div class="stat-n">7</div>
+      <div class="stat-l">Van Briggle Fireplaces</div>
+    </div>
+    <div class="stat rv d3">
+      <div class="stat-n">4</div>
+      <div class="stat-l">Owners in a Century</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     HISTORY
+══════════════════════════════════════════ -->
+<section id="history">
+  <div class="hist-hdr">
+    <span class="sec-kicker rv" style="color:var(--brass)">The History</span>
+    <h2 class="hist-h2 rv d1">112 Years of<br><em>Colorado Legacy</em></h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-spine"></div>
+
+    <div class="tl-beat rv">
+      <div class="tl-node"></div>
+      <div class="tl-copy">
+        <div class="tl-year">1912</div>
+        <h3 class="tl-h3">Arthur Sharp builds the finest home on the finest street in Colorado Springs.</h3>
+        <p class="tl-p">In 1912, Arthur G. Sharp — president of the Exchange National Bank and steward of Colorado Springs' streetcar system since Winfield Scott Stratton's death in 1902 — commissioned architect Nicholas van den Arend to build a home equal to his standing in the city.</p>
+        <p class="tl-p">Van den Arend, a Dutch-born architect also responsible for the landmark Van Briggle Memorial Pottery, delivered a masterwork: 14,840 square feet of gray brick, local sandstone, and imported Italian terracotta tile, crowned by seven Van Briggle ceramic fireplaces that remain intact to this day.</p>
+      </div>
+      <div class="tl-photo">
+        <img src="mansion7.webp" alt="Sharp Mansion front arcade entrance" loading="lazy">
+      </div>
+    </div>
+
+    <div class="tl-beat flip rv">
+      <div class="tl-node"></div>
+      <div class="tl-photo">
+        <img src="mansion2.avif" alt="Sharp Mansion library with original Van Briggle tile fireplace" loading="lazy">
+      </div>
+      <div class="tl-copy">
+        <div class="tl-year">1938</div>
+        <h3 class="tl-h3">The man who ran Colorado Springs lived here for 25 years — and never left willingly.</h3>
+        <p class="tl-p">Arthur Sharp moved his family to Colorado Springs from Burlingame, Kansas in 1895. He spent the next four decades shaping the city's financial and civic infrastructure as the 32-year president of the Exchange National Bank and president of the streetcar system.</p>
+        <p class="tl-p">He lived in his mansion until his death in 1938. His wife Louise remained. The home had never known another family, and every original detail — the fireplaces, the mahogany doors, the greenhouse — bore witness to their quarter-century of residence.</p>
+      </div>
+    </div>
+
+    <div class="tl-beat rv">
+      <div class="tl-node"></div>
+      <div class="tl-copy">
+        <div class="tl-year">1942</div>
+        <h3 class="tl-h3">El Pomar. The Red Cross. The United Way. The estate serves a city for 60 years.</h3>
+        <p class="tl-p">In 1942, the El Pomar Foundation acquired the property and donated it to the American Red Cross, which made the Sharp Mansion its Colorado Springs chapter headquarters. For over six decades, the estate welcomed the city it had been built to preside over.</p>
+        <p class="tl-p">Through all of it — the Red Cross occupancy, the United Fund years, the United Way chapter — not one Van Briggle tile was disturbed. Not one mahogany door replaced. When the Red Cross departed in 2003, the mansion was left exactly as it had been built: intact, irreplaceable, and waiting.</p>
+      </div>
+      <div class="tl-photo">
+        <img src="mansion5.webp" alt="Sharp Mansion illuminated pergola and garden at dusk" loading="lazy">
+      </div>
+    </div>
+
+    <div class="tl-beat flip rv">
+      <div class="tl-node"></div>
+      <div class="tl-photo">
+        <img src="sharp-m.webp" alt="Sharp Mansion aerial view with Pikes Peak backdrop" loading="lazy">
+      </div>
+      <div class="tl-copy">
+        <div class="tl-year">Today</div>
+        <h3 class="tl-h3">Four owners. 112 years. The estate is open — and it has never looked more ready.</h3>
+        <p class="tl-p">The Sharp Mansion has had only four owners in its entire history. The current stewards have added a pickleball court, a putting green, and a pergola garden — while treating every original detail with the same reverence every previous owner showed. Thoughtfully. Carefully. And with the belief that what Arthur Sharp built deserves to endure.</p>
+        <p class="tl-p">Today the carriage house welcomes overnight guests. The conservatory hosts private dinners. The grounds accommodate events under Colorado skies. The Sharp Mansion is, at last, ready to share what it has always been — the finest private address in Colorado Springs.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     DETAILS
+══════════════════════════════════════════ -->
+<section id="details">
+  <div class="det-inner">
+    <div class="det-sticky">
+      <span class="sec-kicker rv">The Details</span>
+      <h2 class="det-h2 rv d1">At a<br><em>Glance</em></h2>
+      <p class="det-sub rv d2">The essentials. We are happy to walk you through every room, every arrangement, and every detail in person.</p>
+      <div class="avail-pill rv d3">
+        <div class="avail-dot"></div>
+        <span class="avail-txt">Accepting Inquiries</span>
+      </div>
+    </div>
+
+    <div class="det-grid">
+      <div class="di rv">
+        <div class="di-l">Address</div>
+        <div class="di-v">1600 N Cascade Ave</div>
+        <div class="di-n">Old North End · Colorado Springs, CO 80907</div>
+      </div>
+      <div class="di rv d1">
+        <div class="di-l">Built</div>
+        <div class="di-v">1912</div>
+        <div class="di-n">Architect: Nicholas van den Arend</div>
+      </div>
+      <div class="di rv">
+        <div class="di-l">Main House</div>
+        <div class="di-v">14,840 Sq Ft</div>
+        <div class="di-n">9 bedrooms · 6 full + 2 half baths</div>
+      </div>
+      <div class="di rv d1">
+        <div class="di-l">Grounds</div>
+        <div class="di-v">0.87 Acres</div>
+        <div class="di-n">Corner lot · Stone &amp; iron perimeter fence</div>
+      </div>
+      <div class="di rv">
+        <div class="di-l">Signature Feature</div>
+        <div class="di-v">7 Van Briggle Fireplaces</div>
+        <div class="di-n">All original ceramic tile surrounds · Intact</div>
+      </div>
+      <div class="di rv d1">
+        <div class="di-l">Guest Capacity</div>
+        <div class="di-v">Up to 11 Overnight</div>
+        <div class="di-n">Carriage house suite · Event capacity on inquiry</div>
+      </div>
+      <div class="di rv">
+        <div class="di-l">Architecture</div>
+        <div class="di-v">Mediterranean · Craftsman</div>
+        <div class="di-n">Gray brick · Italian terracotta tile · Sandstone</div>
+      </div>
+      <div class="di rv d1">
+        <div class="di-l">Historic Status</div>
+        <div class="di-v">Millionaire's Row</div>
+        <div class="di-n">Old North End Historic District · 4 owners</div>
+      </div>
+      <div class="di rv">
+        <div class="di-l">Interior Details</div>
+        <div class="di-v">All Original</div>
+        <div class="di-n">African Mahogany doors · Tapestry dining room · Greenhouse</div>
+      </div>
+      <div class="di rv d1">
+        <div class="di-l">Recreation</div>
+        <div class="di-v">Pickleball + Putting Green</div>
+        <div class="di-n">Vined pergola · Fountain · Outdoor fireplace</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     INQUIRY
+══════════════════════════════════════════ -->
+<section id="inquiry">
+  <div class="inq-inner">
+    <div class="inq-sticky">
+      <span class="sec-kicker rv" style="color:var(--brass)">Begin Here</span>
+      <h2 class="inq-h2 rv d1">Tell Us About<br><em>Your Vision</em></h2>
+      <p class="inq-p rv d2">Whether you are planning a wedding, a private summit, a milestone dinner, or an overnight stay — the first step is a conversation. Every inquiry is answered personally within 24 hours.</p>
+      <div class="inq-contact-hdr rv d3">Managed By</div>
+      <p class="inq-contact-val rv d3">Renjoy Vacation Rentals</p>
+      <p class="inq-contact-val rv d3"><a href="mailto:<!-- TODO: Add contact email -->"><!-- TODO: Add contact email --></a></p>
+      <p class="inq-contact-val rv d3"><a href="tel:<!-- TODO: Add phone -->"><!-- TODO: Add phone --></a></p>
+    </div>
+
+    <form class="iform rv" action="<!-- TODO: Add form handler -->" method="POST">
+      <div class="if-row">
+        <div class="if-grp">
+          <label for="fn">First Name</label>
+          <input type="text" id="fn" name="first_name" placeholder="First name" required>
+        </div>
+        <div class="if-grp">
+          <label for="ln">Last Name</label>
+          <input type="text" id="ln" name="last_name" placeholder="Last name" required>
+        </div>
+      </div>
+      <div class="if-row">
+        <div class="if-grp">
+          <label for="em">Email Address</label>
+          <input type="email" id="em" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="if-grp">
+          <label for="ph">Phone Number</label>
+          <input type="tel" id="ph" name="phone" placeholder="(719) 555-0100">
+        </div>
+      </div>
+      <div class="if-row">
+        <div class="if-grp">
+          <label for="ev">Event Type</label>
+          <select id="ev" name="event_type" required>
+            <option value="" disabled selected>Select event type</option>
+            <option value="wedding">Wedding &amp; Ceremony</option>
+            <option value="gala">Gala or Private Dinner</option>
+            <option value="corporate">Corporate Retreat / Summit</option>
+            <option value="celebration">Milestone Celebration</option>
+            <option value="overnight">Luxury Overnight Stay</option>
+            <option value="film">Film or Photo Production</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="if-grp">
+          <label for="dt">Preferred Date</label>
+          <input type="date" id="dt" name="event_date">
+        </div>
+      </div>
+      <div class="if-grp">
+        <label for="gc">Estimated Guests</label>
+        <select id="gc" name="guest_count">
+          <option value="" disabled selected>Approximate number of guests</option>
+          <option value="1-10">1–10 guests (Intimate)</option>
+          <option value="11-25">11–25 guests</option>
+          <option value="26-50">26–50 guests</option>
+          <option value="51-100">51–100 guests</option>
+          <option value="100+">100+ guests (Full estate)</option>
+          <option value="overnight">Overnight stay (carriage house)</option>
+        </select>
+      </div>
+      <div class="if-grp">
+        <label for="msg">Tell Us About Your Vision</label>
+        <textarea id="msg" name="message" placeholder="Describe your event, any questions about the spaces, special requirements, or anything that will help us prepare for you…"></textarea>
+      </div>
+      <button type="submit" class="iform-submit">Send Inquiry</button>
+      <p class="iform-note">All inquiries are answered personally within 24 hours. Your information is never shared.</p>
+    </form>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     STEWARD
+══════════════════════════════════════════ -->
+<section id="steward">
+  <div class="stw-inner">
+    <p class="stw-p"><strong>Sharp Mansion is professionally managed by Renjoy.</strong> With 750+ vacation rental properties across Colorado Springs, Renjoy handles every detail — guest experience, event coordination, property care, and concierge support — so the estate is always presented at its finest.</p>
+    <div class="rnjy">
+      <div class="rnjy-mark">R</div>
+      <div>
+        <span class="rnjy-name">Renjoy</span>
+        <span class="rnjy-tag">Vacation Rental Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-brand">
+      <div class="ft-name">Sharp Mansion</div>
+      <div class="ft-addr">1600 N Cascade Ave · Colorado Springs, CO 80907</div>
+    </div>
+    <div class="ft-links">
+      <a href="#">Instagram</a>
+      <a href="#">VRBO</a>
+      <a href="#">Booking.com</a>
+    </div>
+    <div class="ft-copy">
+      Managed by <a href="https://renjoy.com">Renjoy</a><br>
+      &copy; 2026 Sharp Mansion. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  /* ── NAV ───────────────────────────────────── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('sc', window.scrollY > 72);
+  }, { passive: true });
+
+  /* ── SCROLL REVEAL ─────────────────────────── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('on');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.rv, .rv-l, .rv-r').forEach(el => io.observe(el));
+
+  /* ── HERO PARALLAX ─────────────────────────── */
+  const heroBg = document.getElementById('hero-bg');
+  if (heroBg) {
+    window.addEventListener('scroll', () => {
+      heroBg.style.transform = `translateY(${window.scrollY * 0.26}px)`;
+    }, { passive: true });
+  }
+
+  /* ── LIGHTBOX ──────────────────────────────── */
+  const lb = document.getElementById('lb');
+  const lbImg = document.getElementById('lb-img');
+  let galleryImgs = [], lbCur = 0;
+
+  document.querySelectorAll('.gi img').forEach((img, i) => {
+    galleryImgs.push({ src: img.src, alt: img.alt });
+    img.closest('.gi').addEventListener('click', () => { lbCur = i; openLb(); });
+  });
+
+  function openLb() {
+    if (!galleryImgs.length) return;
+    lbImg.src = galleryImgs[lbCur].src;
+    lbImg.alt = galleryImgs[lbCur].alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lb-close').addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.getElementById('lb-prev').addEventListener('click', () => {
+    lbCur = (lbCur - 1 + galleryImgs.length) % galleryImgs.length;
+    openLb();
+  });
+  document.getElementById('lb-next').addEventListener('click', () => {
+    lbCur = (lbCur + 1) % galleryImgs.length;
+    openLb();
+  });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft')  { lbCur = (lbCur - 1 + galleryImgs.length) % galleryImgs.length; openLb(); }
+    if (e.key === 'ArrowRight') { lbCur = (lbCur + 1) % galleryImgs.length; openLb(); }
+  });
+</script>
+
+</body>
+</html>
